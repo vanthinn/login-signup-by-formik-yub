@@ -1,3 +1,6 @@
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
@@ -36,12 +39,18 @@ function SignUp(props) {
     }),
     onSubmit: (value) => {
       console.log(value);
-      localStorage.setItem("user", [
-        {
-          username: value.name,
-          password: value.password,
-        },
-      ]);
+      localStorage.setItem(`${value.email}`, `${value.password}`);
+
+      toast.success("🦄 Successful!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     },
   });
 
@@ -126,6 +135,19 @@ function SignUp(props) {
           >
             Submit
           </button>
+
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </form>
       </section>
     </div>
